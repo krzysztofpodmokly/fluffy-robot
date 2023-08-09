@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server"
+import { getServerSession } from 'next-auth';
 
 const result = {
   "personal_info": {
@@ -73,5 +74,8 @@ const result = {
 }
 
 export async function GET() {
+  const session = await getServerSession();
+  console.log('server session', session);
+
   return NextResponse.json(result);
 }
