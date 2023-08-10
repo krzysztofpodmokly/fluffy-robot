@@ -7,7 +7,13 @@ const AuthCheck = ({ children }: BaseProps) => {
 
   console.log('client session', data)
 
-  return children
+  if (data.status === 'authenticated') {
+    return <>{children}</>
+  } else {
+    return <></>
+  }
+
+  // return children
 }
 
 export default AuthCheck

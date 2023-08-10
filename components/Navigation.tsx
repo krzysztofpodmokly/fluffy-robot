@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import SignIn from './SignIn';
+import SignOut from './SignOut';
 
 const Navigation = () => {
   return (
@@ -12,6 +14,10 @@ const Navigation = () => {
         </li>
         <li>
           <Link href={'/blog'}>Page 3</Link>
+        </li>
+        <li>
+          <SignIn />
+          <SignOut />
         </li>
       </ul>
     </nav>
