@@ -3,16 +3,22 @@
 import { useSession, signIn } from "next-auth/react";
 import Image from 'next/image';
 import Link from 'next/link';
+import Loader from "./Loader";
 
-const SignIn = () => {
-  const data = useSession();
+const SignIn = (): JSX.Element => {
+  const { data, status } = useSession();
 
-  console.log(data)
+  if (status === 'loading') {
+    return <Loader />
+  }
 
-  if (data.status === 'authenticated') {
+  if (status === 'authenticated') {
     return <Link href={`/`}>
-      Your photo
-      <Image src={data.data.user?.image ?? '/default-avatar.jpg'} alt="Your Name" width="32" height="32" />
+      <div className="avatar">
+        <div className="w-24 rounded-full">
+          <Image src={data.user?.image ?? '/default-avatar.jpg'} alt="Your Name" width="32" height="32" />
+        </div>
+      </div>
     </Link>
   }
 

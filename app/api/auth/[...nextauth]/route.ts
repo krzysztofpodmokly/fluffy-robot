@@ -3,15 +3,6 @@ import type { NextAuthOptions } from "next-auth";
 import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from "next-auth/providers/google";
 
-// declare global {
-//   namespace NodeJS {
-//     interface ProcessEnv {
-//       GITHUB_ID: string;
-//       GITHUB_SECRET: string;
-//     }
-//   }
-// }
-
 export const authOptions: NextAuthOptions = {
   providers: [
     GithubProvider({
