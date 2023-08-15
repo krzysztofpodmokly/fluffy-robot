@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <AuthProvider>
-      <html lang="en" data-theme="cupcake">
+      <html lang="en" data-theme="light">
         <body className={inter.className}>
           <Navigation />
           {children}

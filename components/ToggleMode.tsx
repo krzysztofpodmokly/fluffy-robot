@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import canUseDOM from '@/helpers/canUseDom'
+import canUseDOM from '@/helpers/canUseDOM'
 
 const ToggleMode = () => {
   const localTheme = canUseDOM && localStorage.getItem('theme')
