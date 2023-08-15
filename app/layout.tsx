@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Fluffy Robot',
-  description: 'Trading app',
+  description: 'Resume app',
 }
 
 export default function RootLayout({
@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <AuthProvider>
-      <html lang="en">
+      <html lang="en" data-theme="cupcake">
         <body className={inter.className}>
           <Navigation />
           {children}

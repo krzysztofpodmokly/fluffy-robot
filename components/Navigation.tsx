@@ -1,25 +1,25 @@
 import Link from 'next/link';
 import SignIn from './SignIn';
 import SignOut from './SignOut';
+import ToggleMode from './ToggleMode';
 
 const Navigation = () => {
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link href={'/'}>Page 1</Link>
-        </li>
-        <li>
-          <Link href={'/about'}>Page 2</Link>
-        </li>
-        <li>
-          <Link href={'/blog'}>Page 3</Link>
-        </li>
-        <li>
-          <SignIn />
-          <SignOut />
-        </li>
-      </ul>
+    <nav className='navbar bg-base-100'>
+      <div className="flex-1">
+        <p className='text-xl'>Resume</p>
+
+      </div>
+
+      <div className="flex-none">
+        <ToggleMode />
+        <ul>
+          <li className='flex items-center'>
+            <SignIn />
+            <SignOut />
+          </li>
+        </ul>
+      </div>
     </nav>
   )
 };

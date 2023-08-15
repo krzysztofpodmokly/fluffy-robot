@@ -14,8 +14,8 @@ const SignIn = (): JSX.Element => {
 
   if (status === 'authenticated') {
     return <Link href={`/`}>
-      <div className="avatar">
-        <div className="w-24 rounded-full">
+      <div className="avatar mr-4">
+        <div className="w-10 rounded-full">
           <Image src={data.user?.image ?? '/default-avatar.jpg'} alt="Your Name" width="32" height="32" />
         </div>
       </div>
