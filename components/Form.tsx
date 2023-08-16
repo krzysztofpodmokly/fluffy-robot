@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import ImageUpload from './ImageUpload';
 
+
 const Form = () => {
   const [text, setText] = useState('');
 
@@ -15,6 +16,8 @@ const Form = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   }
+
+
 
   return <>
     <form className="form-control w-full container px-4" onSubmit={handleSubmit}>
@@ -71,9 +74,8 @@ const Form = () => {
           <input type="text" className="input input-bordered w-full max-w-xs" />
         </div>
       </div>
-
+      {/* <button className="btn btn-primary m-5" type='submit'>Submit</button> */}
     </form>
-    <button className="btn btn-primary m-5" type='submit'>Submit</button>
   </>
 }
 
