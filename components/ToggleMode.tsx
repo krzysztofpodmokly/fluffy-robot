@@ -14,15 +14,14 @@ const ToggleMode = () => {
     const localTheme = localStorage.getItem('theme')
     document.querySelector('html')?.setAttribute('data-theme', localTheme as string);
 
-    () => document.querySelector('html')?.removeAttribute('data-theme');
   }, [theme]);
 
   const handleTheme = (event: React.ChangeEvent<HTMLInputElement>) => {
     const isChecked = event.target.checked;
     if (isChecked) {
-      setTheme('dark')
+      setTheme('dark');
     } else {
-      setTheme('light')
+      setTheme('light');
     }
   }
 
