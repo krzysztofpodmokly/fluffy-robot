@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import ImageUpload from './ImageUpload';
 
@@ -16,8 +16,6 @@ const Form = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   }
-
-
 
   return <>
     <form className="form-control w-full container px-4" onSubmit={handleSubmit}>

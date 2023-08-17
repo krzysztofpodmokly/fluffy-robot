@@ -12,7 +12,7 @@ export default async function Home() {
         <Form />
       </div>
       <div className="w-1/2">
-        <View />
+        {/* <View /> */}
       </div>
     </main>
   )
