@@ -20,7 +20,7 @@ export default function RootLayout({
     <AuthProvider>
       <html lang="en" data-theme="light">
         <body className={inter.className} suppressHydrationWarning={true}>
-          <Navigation />
+          <Navigation /> {/* remove navigation from print mode */}
           {children}
         </body>
       </html>
