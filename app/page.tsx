@@ -1,5 +1,5 @@
 import Form from "@/components/Form";
-import View from "@/components/PDFView";
+import Resume from "@/components/Resume";
 
 export default async function Home() {
   const data = await fetch('http://localhost:3000/api/content');
@@ -12,7 +12,7 @@ export default async function Home() {
         <Form />
       </div>
       <div className="w-1/2">
-        {/* <View /> */}
+        <Resume format="A6" />
       </div>
     </main>
   )
