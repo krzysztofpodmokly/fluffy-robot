@@ -1,5 +1,5 @@
-import Form from "@/components/Form";
-import Resume from "@/components/Resume";
+import Form from "@/components/form/Form";
+import Resume from "@/components/resume/Resume";
 
 export default async function Home() {
   const data = await fetch('http://localhost:3000/api/content');

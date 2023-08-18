@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import SignIn from './SignIn';
-import SignOut from './SignOut';
-import ToggleMode from './ToggleMode';
+import SignIn from '../auth/SignIn';
+import SignOut from '../auth/SignOut';
+import ToggleMode from '../toggleMode/ToggleMode';
 
 const Navigation = () => {
   return (

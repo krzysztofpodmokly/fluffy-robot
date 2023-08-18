@@ -3,7 +3,7 @@
 import { useSession, signIn } from "next-auth/react";
 import Image from 'next/image';
 import Link from 'next/link';
-import Loader from "./Loader";
+import Loader from "../loader/Loader";
 
 const SignIn = (): JSX.Element => {
   const { data, status } = useSession();

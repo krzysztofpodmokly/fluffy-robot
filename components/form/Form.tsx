@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import ImageUpload from './ImageUpload';
+import ImageUpload from '../imageUpload/ImageUpload';
 
 
 const Form = () => {
