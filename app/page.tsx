@@ -7,7 +7,7 @@ export default async function Home() {
 
   // flex min-h-screen flex-col items-center justify-between p-24
   return (
-    <main className="flex">
+    <main className="flex pt-10">
       <div className="w-1/2">
         <Form />
       </div>

@@ -5,7 +5,7 @@ import ToggleMode from '../toggleMode/ToggleMode';
 
 const Navigation = () => {
   return (
-    <nav className='navbar bg-base-100'>
+    <nav className='navbar bg-base-100 fixed z-10'>
       <div className="flex-1">
         <p className='text-xl'>Resume</p>
 
