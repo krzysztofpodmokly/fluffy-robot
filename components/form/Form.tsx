@@ -1,31 +1,44 @@
 'use client'
 
-import useBearStore from '@/store/store';
+import useBearStore from '@/store';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
 import ImageUpload from '../imageUpload/ImageUpload';
 
+type Inputs = {
+  jobTitle: string;
+};
+
 const Form = () => {
-  const jobTitle = useBearStore<any>((state: any) => state.formData.jobTitle);
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
+
+  // const jobTitle = useBearStore<any>((state: any) => state.formData.jobTitle);
   const updateJob = useBearStore((state: any) => state.updateJob)
 
-  const handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault();
-  }
+  const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    updateJob(event.target.value)
-  }
+
+  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   updateJob(event.target.value)
+  // }
 
   return <>
-    <form className="form-control w-full container px-4" onSubmit={handleSubmit}>
-      <h2 className="text-lg  font-semibold">Personal data {jobTitle}</h2>
+    <form className="form-control w-full container px-4" onSubmit={handleSubmit(onSubmit)}>
+      <h2 className="text-lg  font-semibold">Personal data</h2>
 
       <div className="grid grid-cols-2">
         <div className="mb-5">
           <label className="label">
             <span className="label-text-alt">Job Title</span>
           </label>
-          <input type="text" onChange={handleInputChange} value={jobTitle} className="input input-bordered w-full max-w-xs" />
+          {/* <input type="text" onChange={handleInputChange} value={jobTitle} className="input input-bordered w-full max-w-xs" /> */}
+          <input {...register('jobTitle', {
+            required: true, // works after submit
+            onChange: () => {
+              updateJob(watch('jobTitle'))
+            }
+          })} className="input input-bordered w-full max-w-xs" />
+          {errors.jobTitle && <span>This field is required</span>}
         </div>
         <ImageUpload />
 
@@ -71,7 +84,7 @@ const Form = () => {
           <input type="text" className="input input-bordered w-full max-w-xs" />
         </div>
       </div>
-      {/* <button className="btn btn-primary m-5" type='submit'>Submit</button> */}
+      <button className="btn btn-primary m-5" type='submit'>Submit</button>
     </form>
   </>
 }
