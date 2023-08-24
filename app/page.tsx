@@ -11,8 +11,8 @@ export default async function Home() {
         <Form />
       </div>
       <div className="w-1/2">
-        <Resume format="A6" tempProps />
-        <Resume format="A6" />
+        <Resume format="A6" isPreview />
+        {/* <Resume format="A6" /> */}
       </div>
     </main>
   )
