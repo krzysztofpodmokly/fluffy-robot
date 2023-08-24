@@ -12,15 +12,9 @@ type Inputs = {
 const Form = () => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
 
-  // const jobTitle = useBearStore<any>((state: any) => state.formData.jobTitle);
   const updateJob = useBearStore((state: any) => state.updateJob)
 
   const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
-
-
-  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   updateJob(event.target.value)
-  // }
 
   return <>
     <form className="form-control w-full container px-4" onSubmit={handleSubmit(onSubmit)}>
@@ -31,11 +25,11 @@ const Form = () => {
           <label className="label">
             <span className="label-text-alt">Job Title</span>
           </label>
-          {/* <input type="text" onChange={handleInputChange} value={jobTitle} className="input input-bordered w-full max-w-xs" /> */}
           <input {...register('jobTitle', {
             required: true, // works after submit
-            onChange: () => {
-              updateJob(watch('jobTitle'))
+            onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+              // updateJob(watch('jobTitle'))
+              updateJob(event.target.value)
             }
           })} className="input input-bordered w-full max-w-xs" />
           {errors.jobTitle && <span>This field is required</span>}
