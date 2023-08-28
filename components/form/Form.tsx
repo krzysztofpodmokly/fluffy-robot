@@ -2,19 +2,32 @@
 
 import useBearStore from '@/store';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 
 import ImageUpload from '../imageUpload/ImageUpload';
+import { IFormData, IFormState } from '@/app/types';
 
-type Inputs = {
-  jobTitle: string;
-};
+const schema = yup.object({
+  firstName: yup.string().required().min(3, 'Min 3'),
+  lastName: yup.string().required().min(3, 'Min 3'),
+  jobTitle: yup.string().required().min(3, 'Min 3'),
+  email: yup.string().required().email(),
+  country: yup.string().required().min(3, 'Min 3'),
+  phone: yup.number().min(3, 'Please provide e'),
+  city: yup.string().required().min(3, 'Min 3'),
+}).required();
 
 const Form = () => {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<IFormData>({
+    mode: 'onTouched',
+    resolver: yupResolver(schema)
+  });
 
-  const updateJob = useBearStore((state: any) => state.updateJob)
+  const updateForm = useBearStore((state: IFormState) => state.updateForm);
+  const formData = useBearStore((state: IFormState) => state.formData)
 
-  const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
+  const onSubmit: SubmitHandler<IFormData> = data => console.log(data);
 
   return <>
     <form className="form-control w-full container px-4" onSubmit={handleSubmit(onSubmit)}>
@@ -26,13 +39,13 @@ const Form = () => {
             <span className="label-text-alt">Job Title</span>
           </label>
           <input {...register('jobTitle', {
-            required: true, // works after submit
+            required: true,
             onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
-              // updateJob(watch('jobTitle'))
-              updateJob(event.target.value)
+              const { value, name } = event.target;
+              updateForm(value, name)
             }
           })} className="input input-bordered w-full max-w-xs" />
-          {errors.jobTitle && <span>This field is required</span>}
+          {errors.jobTitle && <span>{errors.jobTitle.message}</span>}
         </div>
         <ImageUpload />
 
@@ -40,7 +53,14 @@ const Form = () => {
           <label className="label">
             <span className="label-text-alt">First Name</span>
           </label>
-          <input type="text" onChange={event => { }} value={''} className="input input-bordered w-full max-w-xs" />
+
+          <input {...register('firstName', {
+            required: true,
+            onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+              const { value, name } = event.target;
+              updateForm(value, name)
+            }
+          })} className="input input-bordered w-full max-w-xs" />
         </div>
 
         <div className="mb-5">
