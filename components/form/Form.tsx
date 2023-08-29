@@ -10,7 +10,7 @@ import { IFormData, IFormState } from '@/app/types';
 
 const schema = yup.object({
   firstName: yup.string().required().min(3, 'Min 3'),
-  lastName: yup.string().required().min(3, 'Min 3'),
+  lastName: yup.string().required().min(3, 'Min 32'),
   jobTitle: yup.string().required().min(3, 'Min 3'),
   email: yup.string().required().email(),
   country: yup.string().required().min(3, 'Min 3'),
@@ -20,7 +20,7 @@ const schema = yup.object({
 }).required();
 
 const Form = () => {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<IFormData>({
+  const { register, handleSubmit, watch, formState: { errors } } = useForm({
     mode: 'onTouched',
     resolver: yupResolver(schema)
   });
@@ -30,76 +30,32 @@ const Form = () => {
 
   console.log('form', formData)
 
-  const onSubmit: SubmitHandler<IFormData> = data => console.log(data);
+  const formValues = Object.keys(formData).map((formElement) => {
+    const element = formElement as keyof IFormData
+    if (formElement === 'photo') return <ImageUpload key={formElement} />
+    return <div className="m-2" key={formElement}>
+      <label className="label">
+        <span className="label-text-alt">{formData[element].fieldName}</span>
+      </label>
+      <input {...register(element, {
+        required: true,
+        onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+          const { value, name } = event.target;
+          updateForm(value, name)
+        }
+      })} className="input input-bordered input-sm w-full max-w-xs" />
+      {errors[element] && <span>{errors[element]?.message}</span>}
+    </div>
+  })
+
+  const onSubmit: SubmitHandler<IFormData> = data => console.log('SUBMIT', data);
 
   return <>
-    <form className="form-control w-full container px-4" onSubmit={handleSubmit(onSubmit)}>
+    <form className="form-control w-full container px-4">
       <h2 className="text-lg  font-semibold">Personal data</h2>
 
       <div className="grid grid-cols-2">
-        <div className="mb-5">
-          <label className="label">
-            <span className="label-text-alt">Job Title</span>
-          </label>
-          <input {...register('jobTitle', {
-            required: true,
-            onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
-              const { value, name } = event.target;
-              updateForm(value, name)
-            }
-          })} className="input input-bordered w-full max-w-xs" />
-          {errors.jobTitle && <span>{errors.jobTitle.message}</span>}
-        </div>
-        <ImageUpload />
-
-        <div className="mb-5">
-          <label className="label">
-            <span className="label-text-alt">First Name</span>
-          </label>
-
-          <input {...register('firstName', {
-            required: true,
-            onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
-              const { value, name } = event.target;
-              updateForm(value, name)
-            }
-          })} className="input input-bordered w-full max-w-xs" />
-        </div>
-
-        <div className="mb-5">
-          <label className="label">
-            <span className="label-text-alt">Email</span>
-          </label>
-          <input type="text" className="input input-bordered w-full max-w-xs" />
-        </div>
-
-        <div className="mb-5">
-          <label className="label">
-            <span className="label-text-alt">Country</span>
-          </label>
-          <input type="text" className="input input-bordered w-full max-w-xs" />
-        </div>
-
-        <div className="mb-5">
-          <label className="label">
-            <span className="label-text-alt">Last Name</span>
-          </label>
-          <input type="text" className="input input-bordered w-full max-w-xs" />
-        </div>
-
-        <div className="mb-5">
-          <label className="label">
-            <span className="label-text-alt">Phone</span>
-          </label>
-          <input type="text" className="input input-bordered w-full max-w-xs" />
-        </div>
-
-        <div className="mb-5">
-          <label className="label">
-            <span className="label-text-alt">City</span>
-          </label>
-          <input type="text" className="input input-bordered w-full max-w-xs" />
-        </div>
+        {formValues}
       </div>
       <button className="btn btn-primary m-5" type='submit'>Submit</button>
     </form>

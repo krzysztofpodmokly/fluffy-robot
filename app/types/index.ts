@@ -1,12 +1,17 @@
+interface IFormElement {
+  value: string | number | undefined;
+  fieldName: string;
+}
+
 export interface IFormData {
-  firstName: string;
-  lastName: string;
-  jobTitle: string;
-  email: string;
-  country: string;
-  city: string;
-  phone: number | undefined;
-  photo: string | undefined;
+  firstName: IFormElement;
+  lastName: IFormElement;
+  jobTitle: IFormElement;
+  email: IFormElement;
+  country: IFormElement;
+  city: IFormElement;
+  phone: IFormElement;
+  photo: IFormElement;
 }
 
 export interface IFormState {
