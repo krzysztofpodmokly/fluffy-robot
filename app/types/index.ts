@@ -6,6 +6,7 @@ export interface IFormData {
   country: string;
   city: string;
   phone: number | undefined;
+  photo: string | undefined;
 }
 
 export interface IFormState {

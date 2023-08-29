@@ -8,8 +8,9 @@ const useBearStore = create<IFormState>((set) => ({
     jobTitle: '',
     email: '',
     country: '',
+    city: '',
     phone: undefined,
-    city: ''
+    photo: undefined
   },
   updateForm: (fieldValue, fieldName) => set((state: IFormState) => ({
     formData: {

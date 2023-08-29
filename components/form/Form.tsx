@@ -14,8 +14,9 @@ const schema = yup.object({
   jobTitle: yup.string().required().min(3, 'Min 3'),
   email: yup.string().required().email(),
   country: yup.string().required().min(3, 'Min 3'),
-  phone: yup.number().min(3, 'Please provide e'),
   city: yup.string().required().min(3, 'Min 3'),
+  phone: yup.number().min(3, 'Please provide e'),
+  photo: yup.string()
 }).required();
 
 const Form = () => {
@@ -25,7 +26,9 @@ const Form = () => {
   });
 
   const updateForm = useBearStore((state: IFormState) => state.updateForm);
-  const formData = useBearStore((state: IFormState) => state.formData)
+  const formData = useBearStore((state: IFormState) => state.formData);
+
+  console.log('form', formData)
 
   const onSubmit: SubmitHandler<IFormData> = data => console.log(data);
 

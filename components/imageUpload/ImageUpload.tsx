@@ -2,18 +2,24 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { IFormState } from '@/app/types';
+import useBearStore from '@/store';
 
 const ImageUpload = () => {
   const [file, setFile] = useState<File | undefined>(undefined);
   const [previewImage, setPreviewImage] = useState<string | undefined>(undefined);
+  const updateForm = useBearStore((state: IFormState) => state.updateForm);
 
   const uploadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files
     if (!files) return;
 
     const currentFile = files[0]
-    setPreviewImage(URL.createObjectURL(currentFile));
+
+    const fileUrl = URL.createObjectURL(currentFile)
+    setPreviewImage(fileUrl);
     setFile(currentFile);
+    updateForm(fileUrl, 'photo')
   }
 
 
