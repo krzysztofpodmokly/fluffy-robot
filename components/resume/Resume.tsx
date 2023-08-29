@@ -13,7 +13,7 @@ interface ResumeProps {
 }
 
 const Resume = ({ format, isPreview }: ResumeProps) => {
-  const jobTitle = useBearStore((state: any) => state.formData.jobTitle)
+  const { firstName, photo, lastName, jobTitle, email, country, city, phone } = useBearStore((state: any) => state.formData)
 
   return (
     <div className={cn('bg-slate-100 h-screen flex', {
@@ -24,11 +24,11 @@ const Resume = ({ format, isPreview }: ResumeProps) => {
         <div className='w-2/3 p-5'>
           <div className='flex items-center mb-4'>
             <div className='mr-4'>
-              <Image src={'/default-avatar.jpg'} alt="Avatar" width="30" height="30" className='h-14 w-14' />
+              <Image src={photo.value || '/default-avatar.jpg'} alt="Avatar" width="30" height="30" className='h-14 w-14 rounded-full' />
             </div>
             <div>
-              <h2 className='text-xl font-bold'>John Doe</h2>
-              <h6 className='text-slate-400'>Frontend developer</h6>
+              <h2 className='text-xl font-bold'>{firstName.value || 'John'} {lastName.value || 'Doe'}</h2>
+              <h6 className='text-slate-400'>{jobTitle.value || 'Frontend developer'}</h6>
             </div>
           </div>
 
@@ -129,10 +129,10 @@ const Resume = ({ format, isPreview }: ResumeProps) => {
           <div className='mb-4'>
             <h3 className='font-bold mb-1'>Details</h3>
             <ul>
-              <li>Cracow</li>
-              <li>Poland</li>
-              <li>123 456 789</li>
-              <li>test@test.com</li>
+              <li>{city.value || 'Cracow'}</li>
+              <li>{country.value || 'Poland'}</li>
+              <li>{phone.value || '123 456 789'}</li>
+              <li>{email.value || 'test@test.com'}</li>
             </ul>
           </div>
 

@@ -9,13 +9,13 @@ import ImageUpload from '../imageUpload/ImageUpload';
 import { IFormData, IFormState } from '@/app/types';
 
 const schema = yup.object({
-  firstName: yup.string().required().min(3, 'Min 3'),
-  lastName: yup.string().required().min(3, 'Min 32'),
-  jobTitle: yup.string().required().min(3, 'Min 3'),
-  email: yup.string().required().email(),
-  country: yup.string().required().min(3, 'Min 3'),
-  city: yup.string().required().min(3, 'Min 3'),
-  phone: yup.number().min(3, 'Please provide e'),
+  firstName: yup.string().required().min(3, 'First name is required'),
+  lastName: yup.string().required().min(3, 'Last name is required'),
+  jobTitle: yup.string().required().min(3, 'Job title is required'),
+  email: yup.string().required().email('Email is required'),
+  country: yup.string().required().min(3, 'Country is required'),
+  city: yup.string().required().min(3, 'City is required'),
+  phone: yup.number().min(3, 'Please provide valid phone number'),
   photo: yup.string()
 }).required();
 
@@ -38,25 +38,26 @@ const Form = () => {
         <span className="label-text-alt">{formData[element].fieldName}</span>
       </label>
       <input {...register(element, {
-        required: true,
+        required: 'This is required',
         onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
           const { value, name } = event.target;
           updateForm(value, name)
         }
-      })} className="input input-bordered input-sm w-full max-w-xs" />
-      {errors[element] && <span>{errors[element]?.message}</span>}
+      })} className="input input-bordered input-sm text-sm w-full max-w-xs" />
+      {errors[element] && <span className='text-xs text-red-400'>{errors[element]?.message}</span>}
     </div>
   })
 
-  const onSubmit: SubmitHandler<IFormData> = data => console.log('SUBMIT', data);
+  const onSubmit: SubmitHandler<any> = data => console.log('SUBMIT', data);
 
   return <>
-    <form className="form-control w-full container px-4">
+    <form className="form-control w-full container px-4" onSubmit={handleSubmit(onSubmit)}>
       <h2 className="text-lg  font-semibold">Personal data</h2>
 
       <div className="grid grid-cols-2">
         {formValues}
       </div>
+
       <button className="btn btn-primary m-5" type='submit'>Submit</button>
     </form>
   </>
