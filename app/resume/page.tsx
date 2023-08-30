@@ -1,7 +1,7 @@
-import Resume from '@/components/resume/Resume'
+import ResumeWrapper from '@/components/resume/ResumeWrapper';
 
 const ResumePage = () => {
-  return <Resume format="A4" />
+  return <ResumeWrapper format="A4" />
 };
 
 export default ResumePage;

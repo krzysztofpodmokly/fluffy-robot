@@ -18,3 +18,11 @@ export interface IFormState {
   formData: IFormData
   updateForm: (fieldValue: string | number, fieldName: string) => void;
 }
+
+type Format = 'A4' | 'A6'
+
+export interface ResumeProps {
+  format: Format;
+  data?: IFormData;
+  isPreview?: boolean;
+}

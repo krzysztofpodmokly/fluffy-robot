@@ -28,8 +28,6 @@ const Form = () => {
   const updateForm = useBearStore((state: IFormState) => state.updateForm);
   const formData = useBearStore((state: IFormState) => state.formData);
 
-  console.log('form', formData)
-
   const formValues = Object.keys(formData).map((formElement) => {
     const element = formElement as keyof IFormData
     if (formElement === 'photo') return <ImageUpload key={formElement} />
@@ -44,7 +42,7 @@ const Form = () => {
           updateForm(value, name)
         }
       })} className="input input-bordered input-sm text-sm w-full max-w-xs" />
-      {errors[element] && <span className='text-xs text-red-400'>{errors[element]?.message}</span>}
+      {errors[element] && errors[element]?.message && <span className='text-xs text-red-400'>This field is required</span>}
     </div>
   })
 

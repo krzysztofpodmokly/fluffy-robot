@@ -1,19 +1,13 @@
 'use client';
 
-import useBearStore from '@/store';
 import Image from 'next/image';
 import cn from 'classnames';
 
 import styles from './Resume.module.css'
+import { IFormData, ResumeProps } from '@/app/types';
 
-type Format = 'A4' | 'A6'
-interface ResumeProps {
-  format: Format;
-  isPreview?: boolean;
-}
-
-const Resume = ({ format, isPreview }: ResumeProps) => {
-  const { firstName, photo, lastName, jobTitle, email, country, city, phone } = useBearStore((state: any) => state.formData)
+const Resume = ({ format, isPreview, data }: ResumeProps) => {
+  const { firstName, photo, lastName, jobTitle, email, country, city, phone } = data as IFormData
 
   return (
     <div className={cn('bg-slate-100 h-screen flex', {
@@ -24,7 +18,7 @@ const Resume = ({ format, isPreview }: ResumeProps) => {
         <div className='w-2/3 p-5'>
           <div className='flex items-center mb-4'>
             <div className='mr-4'>
-              <Image src={photo.value || '/default-avatar.jpg'} alt="Avatar" width="30" height="30" className='h-14 w-14 rounded-full' />
+              <Image src={photo.value as string || '/default-avatar.jpg'} alt="Avatar" width="30" height="30" className='h-14 w-14 rounded-full' />
             </div>
             <div>
               <h2 className='text-xl font-bold'>{firstName.value || 'John'} {lastName.value || 'Doe'}</h2>
